@@ -87,15 +87,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: build-artifacts
-          path: build/
-      - name: Copying the nginx folder
-        run: | 
-         sudo mv ${{ github.workspace }}/build/* /var/www/html
          
       - name: Install AWS CLI v2
         run:  |
