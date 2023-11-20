@@ -82,7 +82,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: deployment
+    runs-on: deploy
 
     steps:
       - name: Checkout code
