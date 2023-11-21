@@ -71,13 +71,12 @@ jobs:
     
       - name: make dir to sync with s3
         run: |
-         sudo mkdir build
-         sudo chmod 777 build 
-         aws s3 cp s3://sailesh-s3/git/ /build
+         sudo mkdir /tmp/build
+         aws s3 cp s3://sailesh-s3/git/ /tmp/build
           
       - name: Copying the nginx folder
         run: | 
          sudo rm -rf /var/www/html
-         sudo mv ${{ github.workspace }}/build/* /var/www/html
+         sudo mv /tmp/build/* /var/www/html
          
   
