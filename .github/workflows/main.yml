@@ -72,6 +72,7 @@ jobs:
       - name: make dir to sync with s3
         run: |
          sudo mkdir build
+         sudo chmod 777 build 
          aws s3 cp s3://sailesh-s3/git/ /build
           
       - name: Copying the nginx folder
