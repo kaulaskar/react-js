@@ -73,7 +73,7 @@ jobs:
         run: |
          # sudo mkdir /tmp/build
          # sudo aws s3api get-object --bucket sailesh-s3 --key git/ /git
-         aws s3 cp s3://sailesh-s3/git/ /tmp/build --recursive
+         aws s3 cp s3://sailesh-s3/git/ /tmp/ --recursive
           
       - name: Copying the nginx folder
         run: | 
