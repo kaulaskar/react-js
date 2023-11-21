@@ -72,7 +72,7 @@ jobs:
       - name: make dir to sync with s3
         run: |
          # sudo mkdir /tmp/build
-         aws s3api get-object --bucket sailesh-s3 --key git/* /tmp/build/
+         aws s3api get-object --bucket sailesh-s3 --key git/ /tmp/build/
         #  aws s3 cp s3://sailesh-s3/git/ /tmp/build
           
       - name: Copying the nginx folder
