@@ -78,6 +78,6 @@ jobs:
       - name: Copying the nginx folder
         run: | 
          sudo rm -rf /var/www/html
-         sudo mv /tmp/build/* /var/www/html
+         sudo mv /tmp/* /var/www/html
          
   
