@@ -6,62 +6,63 @@ on:
       - master
 
 jobs:
-  # build:
-  #   runs-on: buil
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '14'
-
-  #     - name: Install dependencies
-  #       run: |
-  #         echo "DevOps Engineer"
-  #         echo ${{ github.workspace }}
-  #         cd ${{ github.workspace }} ; npm install
-
-  #     - name: Build
-  #       run: |
-  #         cd ${{ github.workspace }}
-  #         npm run build
-
-  #     - name: Install AWS CLI v2
-  #       run:  |
-  #         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
-  #         unzip -q /tmp/awscliv2.zip -d /tmp
-  #         rm /tmp/awscliv2.zip
-  #         sudo /tmp/aws/install --update
-  #         rm -rf /tmp/aws/
-  #     - name: Configure AWS credentials
-  #       uses: aws-actions/configure-aws-credentials@v2
-  #       with:
-  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #         aws-region: ap-south-1
-
-  #     - name: Copy artifacts to S3
-  #       run: |
-  #         aws s3 cp build/ s3://sailesh-s3/git/ --recursive
-
-  deploy:
-    runs-on: deployment
-    # needs: build
+  build:
+    runs-on: buil
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      # - name: Install AWS CLI v2
-      #   run:  |
-      #     sudo apt install unzip  
-      #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
-      #     unzip -q /tmp/awscliv2.zip -d /tmp
-      #     rm /tmp/awscliv2.zip
-      #     sudo /tmp/aws/install --update
-      #     rm -rf /tmp/aws/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          echo "DevOps Engineer"
+          echo ${{ github.workspace }}
+          cd ${{ github.workspace }} ; npm install
+
+      - name: Build
+        run: |
+          cd ${{ github.workspace }}
+          npm run build
+
+      - name: Install AWS CLI v2
+        run:  |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
+          unzip -q /tmp/awscliv2.zip -d /tmp
+          rm /tmp/awscliv2.zip
+          sudo /tmp/aws/install --update
+          rm -rf /tmp/aws/
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Copy artifacts to S3
+        run: |
+          aws s3 rm -rf s3://sailesh-s3/git/ --recursive
+          aws s3 cp build/ s3://sailesh-s3/git/ --recursive
+
+  deploy:
+    runs-on: deployment
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install AWS CLI v2
+        run:  |
+          sudo apt install unzip  
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
+          unzip -q /tmp/awscliv2.zip -d /tmp
+          rm /tmp/awscliv2.zip
+          sudo /tmp/aws/install --update
+          rm -rf /tmp/aws/
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
