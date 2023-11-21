@@ -45,7 +45,7 @@ jobs:
 
       - name: Copy artifacts to S3
         run: |
-          aws s3 rm -rf s3://sailesh-s3/git/ --recursive
+          aws s3 rm s3://sailesh-s3/git/ --recursive
           aws s3 cp build/ s3://sailesh-s3/git/ --recursive
 
   deploy:
