@@ -54,8 +54,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Download build artifacts from s3
+    
       - name: make dir to sync with s3
         run: mkdir build
       - name: checkout s3 sync action
