@@ -8,12 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: deploy
-    
-      steps:
-        - name: Use Variable
-          run: echo $AWS_ACCESS_KEY_ID
-          run: echo $AWS_SECRET_ACCESS_KEY
-         
+        
       - name: Install AWS CLI v2
         run:  |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
